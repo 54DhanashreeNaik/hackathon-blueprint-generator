@@ -1,0 +1,55 @@
+# -----------------------------
+# Python
+# -----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Environment Variables
+.env
+
+# -----------------------------
+# Streamlit
+# -----------------------------
+.streamlit/
+
+# -----------------------------
+# IDE
+# -----------------------------
+.vscode/
+.idea/
+
+# -----------------------------
+# OS Files
+# -----------------------------
+Thumbs.db
+.DS_Store
+
+# -----------------------------
+# Build & Cache
+# -----------------------------
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# -----------------------------
+# Generated Files
+# -----------------------------
+data/uploads/*
+data/generated_reports/*
+
+# Keep the folders
+!data/uploads/.gitkeep
+!data/generated_reports/.gitkeep
+
+# -----------------------------
+# Logs
+# -----------------------------
+*.log
