@@ -1,38 +1,58 @@
 import streamlit as st
 from pathlib import Path
-from src.models.state import AppState
-from src.views import home, problem_analysis, research, evidence, intelligence, blueprint, export
 
-# 1. Page Configuration
+from src.models.state import AppState
+from src.views import (
+    home,
+    problem_analysis,
+    research,
+    evidence,
+    intelligence,
+    blueprint,
+    export,
+)
+
+# --------------------------------------------------
+# Page Configuration
+# --------------------------------------------------
 st.set_page_config(
     page_title="Hackathon Blueprint Generator",
     page_icon="🚀",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
 )
 
-# 2. Inject CSS Style
+# --------------------------------------------------
+# Load Custom CSS
+# --------------------------------------------------
 css_path = Path(__file__).parent / "assets" / "custom.css"
+
 if css_path.exists():
-    with open(css_path, "r") as f:
+    with open(css_path, "r", encoding="utf-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# 3. Session State Initialization
+# --------------------------------------------------
+# Initialize Global App State
+# --------------------------------------------------
 if "app_state" not in st.session_state:
     st.session_state.app_state = AppState()
 
-# 4. Multi-Page Navigation Configuration
-pg = st.navigation({
-    "Navigate": [
-        st.Page(home.show, title="Home", icon="🏠"),
-        st.Page(problem_analysis.show, title="Problem Analysis", icon="🔍"),
-        st.Page(research.show, title="Research", icon="🌐"),
-        st.Page(evidence.show, title="Evidence", icon="📊"),
-        st.Page(intelligence.show, title="Intelligence", icon="🧠"),
-        st.Page(blueprint.show, title="Blueprint", icon="🗺️"),
-        st.Page(export.show, title="Export", icon="📤")
-    ]
-})
+# --------------------------------------------------
+# Navigation
+# --------------------------------------------------
+pages = [
+    st.Page(home.show, title="Home", icon="🏠", url_path="home"),
+    st.Page(problem_analysis.show, title="Problem Analysis", icon="🔍", url_path="problem-analysis"),
+    st.Page(research.show, title="Research", icon="🌐", url_path="research"),
+    st.Page(evidence.show, title="Evidence", icon="📊", url_path="evidence"),
+    st.Page(intelligence.show, title="Intelligence", icon="🧠", url_path="intelligence"),
+    st.Page(blueprint.show, title="Blueprint", icon="🗺️", url_path="blueprint"),
+    st.Page(export.show, title="Export", icon="📤", url_path="export"),
+]
 
-# 5. Run Navigation Router
+pg = st.navigation(pages)
+
+# --------------------------------------------------
+# Run Selected Page
+# --------------------------------------------------
 pg.run()
