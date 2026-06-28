@@ -25,7 +25,11 @@ REPORT_DIR.mkdir(parents=True, exist_ok=True)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY", "")
 
-def is_configured() -> bool:
-    """Returns True if minimum required configs are present."""
-    # Place configuration checks here if needed
-    return True
+def is_gemini_configured() -> bool:
+    """Return True if the Gemini API key is configured."""
+    return bool(GEMINI_API_KEY.strip())
+
+
+def is_tavily_configured() -> bool:
+    """Return True if the Tavily API key is configured."""
+    return bool(TAVILY_API_KEY.strip())
