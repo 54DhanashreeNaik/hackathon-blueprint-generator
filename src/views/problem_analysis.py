@@ -35,17 +35,17 @@ def show():
             unsafe_allow_html=True,
         )
 
-        if st.button("🚀 Run Problem Analysis", type="primary"):
+        if st.button("🚀 Start Problem Analysis", type="primary"):
 
-            with st.spinner("Analyzing uploaded documents using Gemini..."):
+            with st.spinner("Analyzing uploaded documents..."):
 
                 try:
+
                     agent = ProblemUnderstandingAgent()
 
                     result = agent.run(
                         {
-                            "uploaded_files":
-                                st.session_state.app_state.uploaded_files
+                            "uploaded_files": st.session_state.app_state.uploaded_files
                         }
                     )
 
@@ -53,9 +53,14 @@ def show():
 
                     st.success("✅ Problem Analysis completed successfully!")
 
+                    st.rerun()
+
                 except Exception as e:
-                    st.error("❌ Problem Analysis failed.")
-                    st.exception(e)
+
+                    st.error("Problem Analysis failed.")
+
+                    with st.expander("Show Error Details"):
+                        st.exception(e)
 
     # ===========================
     # RIGHT COLUMN
